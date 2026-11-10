@@ -1,23 +1,42 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { pageMeta } from "@/lib/seo";
+import {
+  AssistantStory,
+  FlatImagesSection,
+  HomeHero,
+  PlatformBento,
+  ProblemSection,
+  StatsSection,
+  VisualizerStory,
+} from "@/components/home/home-sections";
+import { LogoMarquee } from "@/components/site/logo-marquee";
+import { Testimonials } from "@/components/site/testimonials";
+import { CtaPanel } from "@/components/site/cta-panel";
 
-// The home route ships no og:image, so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({
+    meta: pageMeta({
+      title: "Roomform — Your products, in their own room",
+      description:
+        "A room visualizer for rugs, furniture, flooring, wallpaper and wall art, at true size from one photo. Plus an AI shopping assistant, 3D creator and design studio.",
+    }),
+  }),
+  component: HomePage,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+function HomePage() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <>
+      <HomeHero />
+      <ProblemSection />
+      <FlatImagesSection />
+      <LogoMarquee />
+      <AssistantStory />
+      <VisualizerStory />
+      <StatsSection />
+      <PlatformBento />
+      <Testimonials />
+      <CtaPanel />
+    </>
   );
 }
